@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!--
+    This module is intentionally NOT a child of the parent POM.
+    It only holds the .target file and does not participate in the Tycho build.
+    The parent POM references the .target file directly via a relative path.
+
+    To update the target platform in Eclipse IDE:
+      1. Open target-platform/anypoint-studio-7.21.target
+      2. Click "Set as Active Target Platform" in the editor toolbar
+  -->
+
+  <groupId>org.claudecodestudio</groupId>
+  <artifactId>target-platform</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Claude Code Studio - Target Platform (reference only)</name>
+</project>

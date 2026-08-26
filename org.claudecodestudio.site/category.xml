@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+  <category-def name="claudecodestudio" label="Claude Code Studio"/>
+
+  <feature
+      url="features/org.claudecodestudio.feature_1.0.0.qualifier.jar"
+      id="org.claudecodestudio.feature"
+      version="1.0.0.qualifier">
+    <category name="claudecodestudio"/>
+  </feature>
+</site>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+    id="org.claudecodestudio.feature"
+    label="Claude Code Studio"
+    version="1.0.0.qualifier"
+    provider-name="Claude Code Studio">
+
+  <description>
+    Integrates the Claude Code CLI into Anypoint Studio as an interactive
+    terminal view, with multi-project context management.
+  </description>
+
+  <copyright>
+    Copyright (c) 2025 Claude Code Studio contributors.
+  </copyright>
+
+  <license url="">
+    Apache License, Version 2.0
+  </license>
+
+  <!-- The plugin bundle itself -->
+  <plugin
+      id="org.claudecodestudio.plugin"
+      download-size="0"
+      install-size="0"
+      version="0.0.0"
+      unpack="false"/>
+
+  <!--
+    TM Terminal control bundle — the pure-SWT VT100 terminal widget.
+    Not shipped with Anypoint Studio 7.21, so we include it here.
+  -->
+  <plugin
+      id="org.eclipse.tm.terminal.control"
+      download-size="0"
+      install-size="0"
+      version="0.0.0"
+      unpack="false"/>
+
+</feature>
