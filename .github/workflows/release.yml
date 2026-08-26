@@ -1,0 +1,72 @@
+name: Release
+
+# Tag a release to publish:
+#   git tag v1.0.0 && git push origin v1.0.0
+#
+# Publishes the p2 update site to the gh-pages branch, so users can install via
+#   Help > Install New Software > https://spolwort1970.github.io/claude-code-studio/
+# and attaches the plugin jar + a zipped update site to the GitHub Release.
+
+on:
+  push:
+    tags: [ 'v*' ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      - name: Build
+        run: mvn -B clean package -DskipTests
+
+      - name: Zip the update site
+        run: |
+          cd org.claudecodestudio.site/target/repository
+          zip -r "$GITHUB_WORKSPACE/claude-code-studio-update-site.zip" .
+
+      - name: Publish update site to gh-pages
+        run: |
+          SITE="$GITHUB_WORKSPACE/org.claudecodestudio.site/target/repository"
+          git config --global user.name  "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Work in a detached clone so the source tree is untouched
+          git clone --depth 1 --branch gh-pages \
+            "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" \
+            gh-pages 2>/dev/null || {
+              git clone --depth 1 \
+                "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" gh-pages
+              cd gh-pages && git checkout --orphan gh-pages && git rm -rf . >/dev/null && cd ..
+            }
+
+          # Replace the site contents, keeping .git and .nojekyll
+          find gh-pages -mindepth 1 -maxdepth 1 ! -name .git ! -name .nojekyll -exec rm -rf {} +
+          cp -r "$SITE"/. gh-pages/
+          touch gh-pages/.nojekyll   # p2 uses directories Jekyll would otherwise skip
+
+          cd gh-pages
+          git add -A
+          git diff --staged --quiet || git commit -m "Update site for ${GITHUB_REF_NAME}"
+          git push origin gh-pages
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            --title "${GITHUB_REF_NAME}" \
+            --generate-notes \
+            org.claudecodestudio.plugin/target/*.jar \
+            claude-code-studio-update-site.zip

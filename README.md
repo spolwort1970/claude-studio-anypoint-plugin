@@ -1,22 +1,24 @@
-# Claude Code Studio Plugin
+# Claude Code Studio
 
-An Anypoint Studio plugin that embeds Claude Code as a native chat panel. Type messages directly in Studio and get responses from Claude — with full conversation history, project context awareness, and monospace-formatted code blocks.
+An Anypoint Studio plugin that embeds Claude Code as a native chat panel. Ask questions, explore a codebase, and get help with DataWeave and Mule flows without leaving the IDE — with conversation history, project context awareness, and formatted code blocks.
 
 ---
 
 ## Prerequisites
 
-1. **Anypoint Studio 7.x** (tested on 7.21)
-2. **Claude Code CLI** installed and authenticated via your Claude.ai account (org standard). Verify by running `claude --version` in a terminal — if it returns a version number, you're good. If you haven't authenticated yet, run `claude` once and follow the login prompt, or contact your team lead for the Claude.ai onboarding steps before proceeding.
-3. **Java 17 and Maven** to build the plugin jar. The jar is not distributed prebuilt — you build it from source (see [Building from Source](#building-from-source)) before installing.
+1. **Anypoint Studio 7.x** (developed and tested against 7.21)
+2. **Claude Code CLI**, installed and authenticated. Verify with `claude --version` — if it prints a version, you're set. If not, install it and run `claude` once to complete sign-in.
+3. **Java 17 and Maven**, to build the plugin jar from source.
+
+The plugin drives your own local Claude Code installation. It does not bundle credentials and does not require an API key of its own.
 
 ---
 
 ## Installation — Windows
 
-1. **Clone this repo** (or download it as a zip):
+1. **Clone the repo** (or download the zip):
    ```
-   git clone https://github.com/Surescripts/claude-code-anypoint-studio-plugin.git
+   git clone https://github.com/spolwort1970/claude-code-studio.git
    ```
 
 2. **Close** Anypoint Studio completely.
@@ -25,9 +27,9 @@ An Anypoint Studio plugin that embeds Claude Code as a native chat panel. Type m
    ```
    C:\AnypointStudio\dropins\
    ```
-   > Adjust the path if Studio is installed elsewhere — the `dropins` folder goes in the same directory as `AnypointStudio.exe`. It will not exist by default; just create it.
+   > Adjust the path if Studio is installed elsewhere — `dropins` goes in the same directory as `AnypointStudio.exe`. It does not exist by default; just create it.
 
-4. **Build** the plugin jar (see [Building from Source](#building-from-source)), then **copy** it into that folder:
+4. **Build** the plugin jar (see [Building from Source](#building-from-source)), then **copy** it in:
    ```
    org.claudecodestudio.plugin\target\org.claudecodestudio.plugin-1.0.0-SNAPSHOT.jar  →  C:\AnypointStudio\dropins\
    ```
@@ -40,25 +42,25 @@ An Anypoint Studio plugin that embeds Claude Code as a native chat panel. Type m
 
 ## Installation — macOS
 
-1. **Clone this repo** (or download it as a zip):
+1. **Clone the repo** (or download the zip):
    ```bash
-   git clone https://github.com/Surescripts/claude-code-anypoint-studio-plugin.git
+   git clone https://github.com/spolwort1970/claude-code-studio.git
    ```
 
 2. **Close** Anypoint Studio completely.
 
-3. **Build** the plugin jar (see [Building from Source](#building-from-source)), then **copy** it into the Studio dropins folder:
+3. **Build** the plugin jar (see [Building from Source](#building-from-source)), then **copy** it into Studio's dropins folder:
    ```bash
    cp org.claudecodestudio.plugin/target/org.claudecodestudio.plugin-1.0.0-SNAPSHOT.jar \
       /Applications/AnypointStudio.app/Contents/Eclipse/dropins/
    ```
-   Or navigate there in Finder: right-click `AnypointStudio.app` → **Show Package Contents** → `Contents` → `Eclipse` → `dropins`
+   Or in Finder: right-click `AnypointStudio.app` → **Show Package Contents** → `Contents` → `Eclipse` → `dropins`
 
 4. **Start** Anypoint Studio.
 
 5. **Open the view:** `Window → Show View → Other → General → Claude Studio`
 
-> **Tip:** The plugin auto-detects Claude Code at `/opt/homebrew/bin`, `/usr/local/bin`, `~/.local/bin`, and `~/.npm-global/bin`. If your install is somewhere else, set the path under `Window → Preferences → Claude Studio`.
+> **Tip:** The plugin auto-detects Claude Code at `/opt/homebrew/bin`, `/usr/local/bin`, `~/.local/bin`, and `~/.npm-global/bin`. If yours is elsewhere, set the path under `Window → Preferences → Claude Studio`.
 
 ---
 
@@ -76,7 +78,21 @@ An Anypoint Studio plugin that embeds Claude Code as a native chat panel. Type m
 | Open the view by keyboard | **Ctrl+Shift+L** |
 | Change CLI path, model, or extra args | `Window → Preferences → Claude Studio` |
 
-Claude remembers the full conversation history within a session. Switching project context starts a new session in that project's working directory.
+Claude keeps the full conversation history within a session. Switching project context starts a new session in that project's working directory.
+
+---
+
+## What the plugin does with your code
+
+Worth reading before you install this at work.
+
+- **There is no server.** The plugin invokes the Claude Code CLI on your machine as a child process. It has no backend, sends nothing to any endpoint of its own, and collects no telemetry or analytics.
+- **Your account, your terms.** Anything Claude sees goes through your own Claude Code installation, under whatever plan and data-handling terms already apply to it. Installing this plugin does not change where your code goes — it changes how conveniently you can ask about it.
+- **Project context.** The plugin writes a managed block into a `CLAUDE.md` file in the active project's working directory so Claude knows what project it's looking at. That file lives in your workspace; review it before committing it.
+- **Conversation history** is stored locally so sessions survive restarts. Use **Archive** to clear it.
+- **Permission prompts are bypassed.** The CLI is launched with `--dangerously-skip-permissions`, because an interactive approval prompt has nowhere to render inside the Studio view. That means Claude Code will act within the working directory without asking each time. Know that before pointing it at a repository you care about, and consider whether your employer's AI usage policy permits it.
+
+If your organization restricts which AI tools may touch source code, check that Claude Code itself is approved. This plugin inherits that decision rather than making a new one.
 
 ---
 
@@ -85,8 +101,8 @@ Claude remembers the full conversation history within a session. Switching proje
 Requires Java 17 and Maven.
 
 ```bash
-git clone https://github.com/Surescripts/claude-code-anypoint-studio-plugin.git
-cd claude-code-anypoint-studio-plugin
+git clone https://github.com/spolwort1970/claude-code-studio.git
+cd claude-code-studio
 mvn clean package -DskipTests -pl org.claudecodestudio.plugin,org.claudecodestudio.feature
 ```
 
@@ -94,3 +110,21 @@ Output jar:
 ```
 org.claudecodestudio.plugin/target/org.claudecodestudio.plugin-1.0.0-SNAPSHOT.jar
 ```
+
+---
+
+## Compatibility
+
+| | Tested |
+|---|---|
+| Anypoint Studio | 7.21 (7.x expected to work) |
+| Java | 17 |
+| OS | Windows, macOS |
+
+Reports from other Studio 7.x versions are welcome — open an issue with your version and what happened.
+
+---
+
+## License
+
+Apache License 2.0 — see [LICENSE](LICENSE).

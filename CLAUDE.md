@@ -31,7 +31,7 @@ org.claudecodestudio.plugin/
 ├── plugin.xml                    — Extension points (view, preferences, keybinding)
 ├── build.properties
 ├── icons/claude.png              — 16x16 Claude icon
-├── dist/                         — Pre-built jar for zero-build installation
+├── dist/                         — local build output (not tracked; releases ship via GitHub Releases)
 └── src/org/claudecodestudio/
     ├── Activator.java
     ├── views/ClaudeTerminalView.java     — Main chat view

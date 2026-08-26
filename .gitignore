@@ -19,7 +19,7 @@ bin/
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files — exclude build artifacts everywhere EXCEPT dist/
+# Package files — build artifacts are never tracked
 *.jar
 *.war
 *.nar
@@ -27,7 +27,9 @@ bin/
 *.zip
 *.tar.gz
 *.rar
-!dist/*.jar
+
+# Prebuilt jars ship as GitHub Release assets, not in git
+dist/
 
 # Claude Code internal session data (not part of the project)
 .claude/

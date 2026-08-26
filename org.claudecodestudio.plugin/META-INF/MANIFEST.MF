@@ -4,7 +4,7 @@ Bundle-Name: Claude Code Studio
 Bundle-SymbolicName: org.claudecodestudio.plugin;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.claudecodestudio.Activator
-Bundle-Vendor: Claude Code Studio
+Bundle-Vendor: Shane Polwort
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Require-Bundle: org.eclipse.ui;bundle-version="3.0.0",
  org.eclipse.core.runtime;bundle-version="3.0.0",
