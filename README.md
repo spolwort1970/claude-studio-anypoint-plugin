@@ -4,9 +4,9 @@ An Anypoint Studio plugin that embeds Claude Code as a native chat panel. Ask qu
 
 > Originally developed in February 2026. This repository was recreated in August 2026, so its commit history starts then.
 
-### ⬇️ [Download the latest release](https://github.com/spolwort1970/claude-studio-anypoint-plugin/releases/latest)
+### ⬇️ [Download the Claude Studio plugin](https://github.com/spolwort1970/claude-studio-anypoint-plugin/releases/latest/download/claude-studio-anypoint-plugin.jar)
 
-On the release page, scroll to **Assets** and download the **`.jar`** file, then drop it into Anypoint Studio's `dropins` folder — see [Installation](#installation--windows) below.
+That link always downloads the newest `claude-studio-anypoint-plugin.jar`. Drop it into Anypoint Studio's `dropins` folder — see [Installation](#installation--windows) below. ([Release notes](https://github.com/spolwort1970/claude-studio-anypoint-plugin/releases/latest))
 
 ---
 
@@ -22,7 +22,7 @@ The plugin drives your own local Claude Code installation. It does not bundle cr
 
 ## Installation — Windows
 
-1. **Download** the plugin `.jar` from the [latest release](https://github.com/spolwort1970/claude-studio-anypoint-plugin/releases/latest) (under **Assets**).
+1. **Download** [`claude-studio-anypoint-plugin.jar`](https://github.com/spolwort1970/claude-studio-anypoint-plugin/releases/latest/download/claude-studio-anypoint-plugin.jar).
 
 2. **Close** Anypoint Studio completely.
 
@@ -43,13 +43,13 @@ The plugin drives your own local Claude Code installation. It does not bundle cr
 
 ## Installation — macOS
 
-1. **Download** the plugin `.jar` from the [latest release](https://github.com/spolwort1970/claude-studio-anypoint-plugin/releases/latest) (under **Assets**).
+1. **Download** [`claude-studio-anypoint-plugin.jar`](https://github.com/spolwort1970/claude-studio-anypoint-plugin/releases/latest/download/claude-studio-anypoint-plugin.jar).
 
 2. **Close** Anypoint Studio completely.
 
 3. **Copy** the downloaded `.jar` into Studio's dropins folder:
    ```bash
-   cp ~/Downloads/claude-studio-anypoint-plugin-*.jar \
+   cp ~/Downloads/claude-studio-anypoint-plugin.jar \
       /Applications/AnypointStudio.app/Contents/Eclipse/dropins/
    ```
    Or in Finder: right-click `AnypointStudio.app` → **Show Package Contents** → `Contents` → `Eclipse` → `dropins`

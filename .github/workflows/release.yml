@@ -100,7 +100,7 @@ jobs:
       - name: Name the jar after the release
         run: |
           cp org.claudecodestudio.plugin/target/org.claudecodestudio.plugin-*.jar \
-             "claude-studio-anypoint-plugin-${{ steps.ver.outputs.tag }}.jar"
+             "claude-studio-anypoint-plugin.jar"
 
       - name: Create the GitHub Release
         env:
@@ -109,5 +109,5 @@ jobs:
           gh release create "${{ steps.ver.outputs.tag }}" \
             --title "${{ steps.ver.outputs.tag }}" \
             --generate-notes \
-            "claude-studio-anypoint-plugin-${{ steps.ver.outputs.tag }}.jar" \
+            "claude-studio-anypoint-plugin.jar" \
             "claude-code-studio-update-site-${{ steps.ver.outputs.tag }}.zip"
