@@ -18,7 +18,7 @@ The plugin drives your own local Claude Code installation. It does not bundle cr
 
 1. **Clone the repo** (or download the zip):
    ```
-   git clone https://github.com/spolwort1970/claude-code-studio.git
+   git clone https://github.com/spolwort1970/claude-studio-anypoint-plugin.git
    ```
 
 2. **Close** Anypoint Studio completely.
@@ -44,7 +44,7 @@ The plugin drives your own local Claude Code installation. It does not bundle cr
 
 1. **Clone the repo** (or download the zip):
    ```bash
-   git clone https://github.com/spolwort1970/claude-code-studio.git
+   git clone https://github.com/spolwort1970/claude-studio-anypoint-plugin.git
    ```
 
 2. **Close** Anypoint Studio completely.
@@ -101,8 +101,8 @@ If your organization restricts which AI tools may touch source code, check that 
 Requires Java 17 and Maven.
 
 ```bash
-git clone https://github.com/spolwort1970/claude-code-studio.git
-cd claude-code-studio
+git clone https://github.com/spolwort1970/claude-studio-anypoint-plugin.git
+cd claude-studio-anypoint-plugin
 mvn clean package -DskipTests -pl org.claudecodestudio.plugin,org.claudecodestudio.feature
 ```
 
