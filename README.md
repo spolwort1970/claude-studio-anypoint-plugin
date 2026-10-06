@@ -127,4 +127,4 @@ Reports from other Studio 7.x versions are welcome — open an issue with your v
 
 ## License
 
-Apache License 2.0 — see [LICENSE](LICENSE).
+Released under the [MIT License](LICENSE). Copyright (c) 2026 Shane Polwort.
