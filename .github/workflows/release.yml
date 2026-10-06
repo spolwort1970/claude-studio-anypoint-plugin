@@ -97,6 +97,11 @@ jobs:
           git diff --staged --quiet || git commit -m "Update site for ${{ steps.ver.outputs.tag }}"
           git push origin gh-pages
 
+      - name: Name the jar after the release
+        run: |
+          cp org.claudecodestudio.plugin/target/org.claudecodestudio.plugin-*.jar \
+             "claude-studio-anypoint-plugin-${{ steps.ver.outputs.tag }}.jar"
+
       - name: Create the GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -104,5 +109,5 @@ jobs:
           gh release create "${{ steps.ver.outputs.tag }}" \
             --title "${{ steps.ver.outputs.tag }}" \
             --generate-notes \
-            org.claudecodestudio.plugin/target/*.jar \
+            "claude-studio-anypoint-plugin-${{ steps.ver.outputs.tag }}.jar" \
             "claude-code-studio-update-site-${{ steps.ver.outputs.tag }}.zip"

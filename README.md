@@ -4,13 +4,17 @@ An Anypoint Studio plugin that embeds Claude Code as a native chat panel. Ask qu
 
 > Originally developed in February 2026. This repository was recreated in August 2026, so its commit history starts then.
 
+### ⬇️ [Download the latest release](https://github.com/spolwort1970/claude-studio-anypoint-plugin/releases/latest)
+
+On the release page, scroll to **Assets** and download the **`.jar`** file, then drop it into Anypoint Studio's `dropins` folder — see [Installation](#installation--windows) below.
+
 ---
 
 ## Prerequisites
 
 1. **Anypoint Studio 7.x** (developed and tested against 7.21)
 2. **Claude Code CLI**, installed and authenticated. Verify with `claude --version` — if it prints a version, you're set. If not, install it and run `claude` once to complete sign-in.
-3. **Java 17 and Maven**, to build the plugin jar from source.
+3. **Java 17 and Maven** — only if you want to build the plugin jar from source instead of downloading it.
 
 The plugin drives your own local Claude Code installation. It does not bundle credentials and does not require an API key of its own.
 
@@ -18,10 +22,7 @@ The plugin drives your own local Claude Code installation. It does not bundle cr
 
 ## Installation — Windows
 
-1. **Clone the repo** (or download the zip):
-   ```
-   git clone https://github.com/spolwort1970/claude-studio-anypoint-plugin.git
-   ```
+1. **Download** the plugin `.jar` from the [latest release](https://github.com/spolwort1970/claude-studio-anypoint-plugin/releases/latest) (under **Assets**).
 
 2. **Close** Anypoint Studio completely.
 
@@ -31,10 +32,8 @@ The plugin drives your own local Claude Code installation. It does not bundle cr
    ```
    > Adjust the path if Studio is installed elsewhere — `dropins` goes in the same directory as `AnypointStudio.exe`. It does not exist by default; just create it.
 
-4. **Build** the plugin jar (see [Building from Source](#building-from-source)), then **copy** it in:
-   ```
-   org.claudecodestudio.plugin\target\org.claudecodestudio.plugin-1.0.0-SNAPSHOT.jar  →  C:\AnypointStudio\dropins\
-   ```
+4. **Copy** the downloaded `.jar` into `C:\AnypointStudio\dropins\`.
+   (Prefer to build it yourself? See [Building from Source](#building-from-source).)
 
 5. **Start** Anypoint Studio.
 
@@ -44,16 +43,13 @@ The plugin drives your own local Claude Code installation. It does not bundle cr
 
 ## Installation — macOS
 
-1. **Clone the repo** (or download the zip):
-   ```bash
-   git clone https://github.com/spolwort1970/claude-studio-anypoint-plugin.git
-   ```
+1. **Download** the plugin `.jar` from the [latest release](https://github.com/spolwort1970/claude-studio-anypoint-plugin/releases/latest) (under **Assets**).
 
 2. **Close** Anypoint Studio completely.
 
-3. **Build** the plugin jar (see [Building from Source](#building-from-source)), then **copy** it into Studio's dropins folder:
+3. **Copy** the downloaded `.jar` into Studio's dropins folder:
    ```bash
-   cp org.claudecodestudio.plugin/target/org.claudecodestudio.plugin-1.0.0-SNAPSHOT.jar \
+   cp ~/Downloads/claude-studio-anypoint-plugin-*.jar \
       /Applications/AnypointStudio.app/Contents/Eclipse/dropins/
    ```
    Or in Finder: right-click `AnypointStudio.app` → **Show Package Contents** → `Contents` → `Eclipse` → `dropins`
