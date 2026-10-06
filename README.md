@@ -2,6 +2,8 @@
 
 An Anypoint Studio plugin that embeds Claude Code as a native chat panel. Ask questions, explore a codebase, and get help with DataWeave and Mule flows without leaving the IDE — with conversation history, project context awareness, and formatted code blocks.
 
+> Originally developed in February 2026. This repository was recreated in August 2026, so its commit history starts then.
+
 ---
 
 ## Prerequisites
